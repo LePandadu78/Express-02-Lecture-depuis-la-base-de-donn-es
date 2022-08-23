@@ -4,6 +4,8 @@ const express = require("express");
 
 const app = express();
 
+app.use(express.json());
+
 const port = 5000;
 
 const welcome = (req, res) => {
@@ -14,7 +16,7 @@ app.get("/", welcome);
 
 const movieHandlers = require("./movieHandlers");
 
-const usersHandlers = require("./userHandlers");
+const usersHandlers = require("./usersHandlers");
 
 app.get("/api/movies", movieHandlers.getMovies);
 app.get("/api/movies/:id", movieHandlers.getMovieById);
@@ -30,3 +32,7 @@ app.listen(port, (err) => {
     console.log(`Server is listening on ${port}`);
   }
 });
+
+app.post("/api/movies", movieHandlers.postMovie);
+
+app.post("/api/users", usersHandlers.postUsers);
